@@ -76,7 +76,7 @@ client.on("messageCreate", async (message) => {
 	if (message.content.startsWith("!!whats your favorite movie?")) {
 		return await SendMessage(
 			message.channel.id, 
-			"my favorite movie is 'No Country For Old Men', if you want to read about it, here is a wikipedia link: <https://en.wikipedia.org/wiki/No_Country_for_Old_Men>"
+			"my favorite movie is 'No Country For Old Men'! if you want to read about it, here is a wikipedia link: <https://en.wikipedia.org/wiki/No_Country_for_Old_Men>"
 		);
 	}
 
