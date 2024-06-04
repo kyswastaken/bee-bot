@@ -65,10 +65,18 @@ client.on("messageCreate", async (message) => {
     // help command
 
 	if (message.content.startsWith("!!help")) {
-        // SendMessage(message.channel.id, {embeds: [ embed("title", "description") ] })
 		return await SendMessage(
 			message.channel.id, 
 			"all of my current commands can be found here: <https://docs.google.com/document/d/1xokFtmORSSH59nDOST4L80Yp-dr7DhMBP2_a-1Pz7N0/edit?usp=sharing>, or check my bio for my discord!"
+		);
+	}
+
+	// favorite movie command
+
+	if (message.content.startsWith("!!whats your favorite movie?")) {
+		return await SendMessage(
+			message.channel.id, 
+			"my favorite movie is 'No Country For Old Men', if you want to read about it, here is a wikipedia link: <https://en.wikipedia.org/wiki/No_Country_for_Old_Men>"
 		);
 	}
 
