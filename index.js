@@ -67,7 +67,7 @@ client.on("messageCreate", async (message) => {
 	if (message.content.startsWith("!!help")) {
 		return await SendMessage(
 			message.channel.id,
-			"all of my current commands can be found here: <https://docs.google.com/document/d/1xokFtmORSSH59nDOST4L80Yp-dr7DhMBP2_a-1Pz7N0/edit?usp=sharing>, or check my bio for my discord!"
+			"all of my current commands can be found here: <https://docs.google.com/document/d/1xokFtmORSSH59nDOST4L80Yp-dr7DhMBP2_a-1Pz7N0/edit?usp=sharing>, or here's an invite to my discord, theres all sorts of info there. <https://discord.gg/P5Ca5WxkPH>"
 		);
 	}
 
