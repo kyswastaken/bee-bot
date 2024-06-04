@@ -1,5 +1,5 @@
 const Config = require("./config");
-var stringMath = require('string-math');
+var stringMath = require("string-math");
 const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
 const client = new Client({
 	intents: [
@@ -8,11 +8,11 @@ const client = new Client({
 		GatewayIntentBits.GuildPresences,
 		GatewayIntentBits.GuildMessageReactions,
 		GatewayIntentBits.DirectMessages,
-		GatewayIntentBits.MessageContent
-	]
-    // intents: Object.keys(GatewayIntentBits).map((a)=>{
-    // 	return GatewayIntentBits[a]
-    // }),
+		GatewayIntentBits.MessageContent,
+	],
+	// intents: Object.keys(GatewayIntentBits).map((a)=>{
+	// 	return GatewayIntentBits[a]
+	// }),
 });
 const Prefix = "!!";
 
@@ -23,16 +23,16 @@ client.on("ready", () => {
 });
 
 function embed(title, message) {
-    const e = new EmbedBuilder()
-        .setColor("#fdfd96")
-        .setTitle(title)
-        .setDescription(message)
-        .setFooter({ text: "beebot" });
+	const e = new EmbedBuilder()
+		.setColor("#fdfd96")
+		.setTitle(title)
+		.setDescription(message)
+		.setFooter({ text: "beebot" });
 
-    return e;
+	return e;
 }
 
-let timers = {}
+let timers = {};
 
 async function SendMessage(ChannelID, message) {
 	try {
@@ -43,30 +43,30 @@ async function SendMessage(ChannelID, message) {
 	}
 }
 
+// basic commands
+
 // ping response
 
 client.on("messageCreate", async (message) => {
 	if (message.author.bot) return;
 
-    if (message.mentions.has(client.user)) {
-        return await SendMessage(message.channel.id, "yes?");
-    }
+	if (message.mentions.has(client.user)) {
+		return await SendMessage(message.channel.id, "yes?");
+	}
 
-    if (message.guild.id == "1187699080458145792" && message.channel.id != "1191688238046380052") return;
+	if (message.guild.id == "1187699080458145792" && message.channel.id != "1191688238046380052") return;
 
 	if (!message.content.startsWith(Prefix)) return;
 
-
-    // hello command
+	// hello command
 
 	if (message.content.startsWith("!!hello")) return await SendMessage(message.channel.id, "Hello!");
 
-
-    // help command
+	// help command
 
 	if (message.content.startsWith("!!help")) {
 		return await SendMessage(
-			message.channel.id, 
+			message.channel.id,
 			"all of my current commands can be found here: <https://docs.google.com/document/d/1xokFtmORSSH59nDOST4L80Yp-dr7DhMBP2_a-1Pz7N0/edit?usp=sharing>, or check my bio for my discord!"
 		);
 	}
@@ -75,83 +75,93 @@ client.on("messageCreate", async (message) => {
 
 	if (message.content.startsWith("!!whats your favorite movie?")) {
 		return await SendMessage(
-			message.channel.id, 
+			message.channel.id,
 			'my favorite movie is: "No Country For Old Men", i think ive watched it about 16 times already.. if you want to read about it, here is a wikipedia link: <https://en.wikipedia.org/wiki/No_Country_for_Old_Men>'
 		);
 	}
 
-    // ping command
+	// ping command
 
 	if (message.content.startsWith("!!womp")) {
 		return await SendMessage(message.channel.id, "womp womp");
 	}
 
-    // meow command
+	// meow command
 
 	if (message.content.startsWith("!!meow")) {
 		return await SendMessage(message.channel.id, "meow :3");
 	}
 
-    // i love you command (ily bee)
+	// i love you command (ily bee)
 
 	if (message.content.startsWith("!!i love you")) {
 		return await SendMessage(message.channel.id, "i love you too <3");
 	}
 
-    // emoji for nerds command
+	// emoji for nerds command
 
 	if (message.content.startsWith("!!🤫🧏‍♂️")) {
 		return await SendMessage(message.channel.id, "**fuck you, touch a woman**");
 	}
 
-    // playlists command
+	// playlists command
 
 	if (message.content.startsWith("!!playlists")) {
-		return await SendMessage(message.channel.id, 
+		return await SendMessage(
+			message.channel.id,
 			"<https://open.spotify.com/playlist/0Nxz9XOflxkKpBTwS8WmVU?si=96088500eb644ba1> \n<https://open.spotify.com/playlist/3qKTJM8Bk0gk2vnCyDmyaL?si=641459e8f78f4dfc>"
 		);
 	}
 
-    // are you single command
+	// are you single command
 
 	if (message.content.startsWith("!!are you single?")) {
 		return await SendMessage(message.channel.id, "i am yes!");
 	}
 
-    // favourite food command
+	// favorite food command
 
 	if (message.content.startsWith("!!whats your favorite food?")) {
-        return await SendMessage(message.channel.id, "mossberg 590");
+		return await SendMessage(message.channel.id, "mossberg 590");
 	}
 
-    // favourite drink command
+	// favorite drink command
 
 	if (message.content.startsWith("!!whats your favorite drink?")) {
 		return await SendMessage(message.channel.id, "lemonade!");
 	}
 
-    // favourite song command
+	// favorite song command
 
 	if (message.content.startsWith("!!whats your favorite song?")) {
-		return await SendMessage(message.channel.id, 'currently my favorite song is: "O lord, I have my doubts" by the $uicideboy$!');
-	}
-
-    // favoUrite color command
-
-	if (message.content.startsWith("!!whats your favorite color?")) {
-		return await SendMessage(message.channel.id, 
-			`yellow, and no, not for that reason`
+		return await SendMessage(
+			message.channel.id,
+			'currently my favorite song is: "O lord, I have my doubts" by the $uicideboy$!'
 		);
 	}
 
-    // avatar command
+	// favorite color command
+
+	if (message.content.startsWith("!!whats your favorite color?")) {
+		return await SendMessage(message.channel.id, `yellow, and no, not for that reason`);
+	}
+
+	// more "complex" commands
+
+	// avatar command
 
 	if (message.content.startsWith("!!avatar")) {
 		if (message.mentions.users.size) {
 			const taggedUser = message.mentions.users.first();
-			return await SendMessage(message.channel.id, `${taggedUser.username}'s avatar: ${taggedUser.displayAvatarURL()}`);
+			return await SendMessage(
+				message.channel.id,
+				`${taggedUser.username}'s avatar: ${taggedUser.displayAvatarURL()}`
+			);
 		} else {
-			return await SendMessage(message.channel.id, `${message.author.username}, your avatar: ${message.author.displayAvatarURL()}`);
+			return await SendMessage(
+				message.channel.id,
+				`${message.author.username}, your avatar: ${message.author.displayAvatarURL()}`
+			);
 		}
 	}
 
@@ -163,50 +173,43 @@ client.on("messageCreate", async (message) => {
 			let now = Date.now();
 			let difference = now - timers[id];
 			timers[id] = null;
-			
 
-
-
-			return await SendMessage(message.channel.id, `timer stopped! - ${msToTime(difference)}`); 
+			return await SendMessage(message.channel.id, `timer stopped! - ${msToTime(difference)}`);
 		} else {
 			timers[id] = Date.now();
 			return await SendMessage(message.channel.id, `timer started!`);
 		}
-
-
 	}
 
 	// calculator command
 
 	if (message.content.startsWith("!!calc")) {
-		let expression = message.content.replace('!!calc ', '');
-		if (expression.length == 0) return await SendMessage(message.channel.id, "the way you use the command is: !!calc 1+1, ect");
-		let answer = 'invalid argument:\nfor addition use +\nfor subtraction use -\nfor multiplication use *\nfor division use /' 
-		try{
+		let expression = message.content.replace("!!calc ", "");
+		if (expression.length == 0)
+			return await SendMessage(message.channel.id, "the way you use the command is: !!calc 1+1, ect");
+		let answer =
+			"invalid argument:\nfor addition use +\nfor subtraction use -\nfor multiplication use *\nfor division use /";
+		try {
 			answer = stringMath(expression);
-		} catch(e) {
-
-		}
+		} catch (e) {}
 
 		return await SendMessage(message.channel.id, `${answer}`);
 	}
 
-
-
-    // hug command (should just ask tk, he gives good hugs ngl)
+	// hug command (should just ask tk, he gives good hugs ngl)
 
 	if (message.content.startsWith("!!can i have a hug?")) {
 		const options = ["hmm sure, *hugs*", "**no, take a fucking shower**"];
 		const weights = [10, 90];
 
-        return await SendMessage(message.channel.id, weighted_random(options, weights));
+		return await SendMessage(message.channel.id, weighted_random(options, weights));
 	}
 
 	if (message.content.startsWith("!!will you marry me?")) {
-        const options = ["i thought you would never ask! ||yes!||", "i thought you would never ask! ||**no!!**||"];
-        const weights = [5, 95];
+		const options = ["i thought you would never ask! ||yes!||", "i thought you would never ask! ||**no!!**||"];
+		const weights = [5, 95];
 
-        return await SendMessage(message.channel.id, weighted_random(options, weights));
+		return await SendMessage(message.channel.id, weighted_random(options, weights));
 	}
 
 	if (message.content.startsWith("!!whats a baby dog?")) {
@@ -221,7 +224,6 @@ client.on("messageCreate", async (message) => {
 		return await SendMessage(message.channel.id, Doggos[Math.floor(Math.random() * Doggos.length)]);
 	}
 
-
 	// rps command
 
 	if (message.content.startsWith("!!rps")) {
@@ -235,10 +237,13 @@ client.on("messageCreate", async (message) => {
 		const botChoice = choices[Math.floor(Math.random() * choices.length)];
 		const result = determineWinner(userChoice, botChoice);
 
-		return await SendMessage(message.channel.id, `you chose: ${userChoice}\n I chose: ${botChoice}\n result: ${result}`);
+		return await SendMessage(
+			message.channel.id,
+			`you chose: ${userChoice}\n I chose: ${botChoice}\n result: ${result}`
+		);
 	}
 
-    return await SendMessage(message.channel.id, "i have no idea what you are saying, use !!help dumbass")
+	return await SendMessage(message.channel.id, "i have no idea what you are saying, use !!help dumbass");
 });
 
 function determineWinner(userChoice, botChoice) {
@@ -254,33 +259,29 @@ function determineWinner(userChoice, botChoice) {
 }
 
 function weighted_random(items, weights) {
-    var i;
+	var i;
 
-    for (i = 1; i < weights.length; i++)
-        weights[i] += weights[i - 1];
-    
-    var random = Math.random() * weights[weights.length - 1];
-    
-    for (i = 0; i < weights.length; i++)
-        if (weights[i] > random)
-            break;
-    
-    return items[i];
+	for (i = 1; i < weights.length; i++) weights[i] += weights[i - 1];
+
+	var random = Math.random() * weights[weights.length - 1];
+
+	for (i = 0; i < weights.length; i++) if (weights[i] > random) break;
+
+	return items[i];
 }
 
 function msToTime(duration) {
 	var milliseconds = Math.floor((duration % 1000) / 100),
-	  seconds = Math.floor((duration / 1000) % 60),
-	  minutes = Math.floor((duration / (1000 * 60)) % 60),
-	  hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-  
-	hours = (hours < 10) ? "0" + hours : hours;
-	minutes = (minutes < 10) ? "0" + minutes : minutes;
-	seconds = (seconds < 10) ? "0" + seconds : seconds;
-  
+		seconds = Math.floor((duration / 1000) % 60),
+		minutes = Math.floor((duration / (1000 * 60)) % 60),
+		hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+	hours = hours < 10 ? "0" + hours : hours;
+	minutes = minutes < 10 ? "0" + minutes : minutes;
+	seconds = seconds < 10 ? "0" + seconds : seconds;
+
 	return hours + ":" + minutes + ":" + seconds;
 }
-
 
 // join message
 
