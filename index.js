@@ -1,5 +1,5 @@
 const Config = require("./config");
-
+var stringMath = require('string-math');
 const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
 const client = new Client({
 	intents: [
@@ -175,6 +175,23 @@ client.on("messageCreate", async (message) => {
 
 
 	}
+
+	// calculator command
+
+	if (message.content.startsWith("!!calc")) {
+		let expression = message.content.replace('!!calc ', '');
+		if (expression.length == 0) return await SendMessage(message.channel.id, "the way you use the command is: !!calc 1+1, ect");
+		let answer = 'invalid argument:\nfor addition use +\nfor subtraction use -\nfor multiplication use *\nfor division use /' 
+		try{
+			answer = stringMath(expression);
+		} catch(e) {
+
+		}
+
+		return await SendMessage(message.channel.id, `${answer}`);
+	}
+
+
 
     // hug command (should just ask tk, he gives good hugs ngl)
 
