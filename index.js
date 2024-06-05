@@ -144,7 +144,7 @@ client.on("messageCreate", async (message) => {
 	// favorite color command
 
 	if (message.content.startsWith("!!whats your favorite color?")) {
-		return await SendMessage(message.channel.id, `yellow, and no, not for that reason.`);
+		return await SendMessage(message.channel.id, `yellow, and no, not for **that** reason.`);
 	}
 
 	// more "complex" commands
@@ -156,13 +156,26 @@ client.on("messageCreate", async (message) => {
 			const taggedUser = message.mentions.users.first();
 			return await SendMessage(
 				message.channel.id,
-				`${taggedUser.username}'s avatar: ${taggedUser.displayAvatarURL()}`
+				`${taggedUser.displayAvatarURL({ dynamic: true, size: 512 })}`
 			);
 		} else {
 			return await SendMessage(
 				message.channel.id,
-				`${message.author.username}, your avatar: ${message.author.displayAvatarURL()}`
+				`${message.author.username}${message.author.displayAvatarURL()}`
 			);
+		}
+	}
+
+	// guild avatar command
+
+	if (message.content.startsWith("!!gavatar")) {
+		const member = message.mentions.members.first() || message.member;
+
+		if (member) {
+			const guildAvatarURL = member.displayAvatarURL({ dynamic: true, size: 512 });
+			return message.channel.send(`${guildAvatarURL}`);
+		} else {
+			return message.channel.send("member not found");
 		}
 	}
 
