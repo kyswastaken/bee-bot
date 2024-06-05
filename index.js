@@ -9,6 +9,7 @@ const client = new Client({
 		GatewayIntentBits.GuildMessageReactions,
 		GatewayIntentBits.DirectMessages,
 		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
 	],
 	// intents: Object.keys(GatewayIntentBits).map((a)=>{
 	// 	return GatewayIntentBits[a]
@@ -143,7 +144,7 @@ client.on("messageCreate", async (message) => {
 	// favorite color command
 
 	if (message.content.startsWith("!!whats your favorite color?")) {
-		return await SendMessage(message.channel.id, `yellow, and no, not for that reason`);
+		return await SendMessage(message.channel.id, `yellow, and no, not for that reason.`);
 	}
 
 	// more "complex" commands
@@ -290,7 +291,19 @@ client.on("guildMemberAdd", (member) => {
 	const welcomeChannel = guild.systemChannel;
 
 	if (welcomeChannel) {
-		const message = `Welcome ${member} to ${guild.name}!`;
+		const message = `welcome ${member} to ${guild.name}!`;
+		welcomeChannel.send(message);
+	}
+});
+
+// leave message
+
+client.on("guildMemberRemove", (member) => {
+	const guild = member.guild;
+	const welcomeChannel = guild.systemChannel;
+
+	if (welcomeChannel) {
+		const message = `${member} has left ${guild.name}.`;
 		welcomeChannel.send(message);
 	}
 });
