@@ -93,7 +93,7 @@ client.on("messageCreate", async (message) => {
 		return await SendMessage(message.channel.id, "meow :3");
 	}
 
-	// i love you command (ily bee)
+	// i love you command
 
 	if (message.content.startsWith("!!i love you")) {
 		return await SendMessage(message.channel.id, "i love you too <3");
@@ -161,7 +161,7 @@ client.on("messageCreate", async (message) => {
 		} else {
 			return await SendMessage(
 				message.channel.id,
-				`${message.author.username}${message.author.displayAvatarURL()}`
+				`${message.author.displayAvatarURL()}`
 			);
 		}
 	}
@@ -210,7 +210,7 @@ client.on("messageCreate", async (message) => {
 		return await SendMessage(message.channel.id, `${answer}`);
 	}
 
-	// hug command (should just ask tk, he gives good hugs ngl)
+	// hug command 
 
 	if (message.content.startsWith("!!can i have a hug?")) {
 		const options = ["hmm sure, *hugs*", "**no, take a fucking shower**"];
