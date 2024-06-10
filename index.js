@@ -183,21 +183,25 @@ client.on("messageCreate", async (message) => {
 	// user info command
 
 	if (message.content.startsWith("!!userinfo")) {
+		let user;
+		let member;
+
 		if (message.mentions.users.size) {
-			const taggedUser = message.mentions.users.first();
-			const member = message.guild.members.cache.get(taggedUser.id);
-
-			const userInfo = `
-**Username:** ${taggedUser.tag}
-**Discord ID:** ${taggedUser.id}
-**Account Created On:** ${taggedUser.createdAt}
-**Joined This Server On:** ${member.joinedAt}
-            `;
-
-			return await message.channel.send(userInfo);
+			user = message.mentions.users.first();
+			member = message.guild.members.cache.get(user.id);
 		} else {
-			return await message.channel.send("you have to @ the user...");
+			user = message.author;
+			member = message.guild.members.cache.get(user.id);
 		}
+
+		const userInfo = `
+**Username:** ${user.tag}
+**Discord ID:** ${user.id}
+**Account Created On:** ${user.createdAt}
+**Joined This Server On:** ${member.joinedAt}
+        `;
+
+		return await message.channel.send(userInfo);
 	}
 
 	// timer command
