@@ -1,6 +1,6 @@
 const Config = require("./config");
 var stringMath = require("string-math");
-const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
+const { Client, GatewayIntentBits, EmbedBuilder, ActivityType } = require("discord.js");
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
@@ -11,16 +11,20 @@ const client = new Client({
 		GatewayIntentBits.MessageContent,
 		GatewayIntentBits.GuildMembers,
 	],
-	// intents: Object.keys(GatewayIntentBits).map((a)=>{
-	// 	return GatewayIntentBits[a]
-	// }),
 });
 const Prefix = "!!";
 
-client.on("ready", () => {
+client.once("ready", () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-	client.user.setStatus("online");
-	client.user.setActivity("Listening to $uicideboy$", { type: "LISTENING" });
+	client.user.setPresence({
+		activities: [
+			{
+				name: "$uicideboy$",
+				type: ActivityType.Listening,
+			},
+		],
+		status: "online",
+	});
 });
 
 function embed(title, message) {
@@ -159,10 +163,7 @@ client.on("messageCreate", async (message) => {
 				`${taggedUser.displayAvatarURL({ dynamic: true, size: 512 })}`
 			);
 		} else {
-			return await SendMessage(
-				message.channel.id,
-				`${message.author.displayAvatarURL()}`
-			);
+			return await SendMessage(message.channel.id, `${message.author.displayAvatarURL()}`);
 		}
 	}
 
@@ -176,6 +177,26 @@ client.on("messageCreate", async (message) => {
 			return message.channel.send(`${guildAvatarURL}`);
 		} else {
 			return message.channel.send("member not found");
+		}
+	}
+
+	// user info command
+
+	if (message.content.startsWith("!!userinfo")) {
+		if (message.mentions.users.size) {
+			const taggedUser = message.mentions.users.first();
+			const member = message.guild.members.cache.get(taggedUser.id);
+
+			const userInfo = `
+**Username:** ${taggedUser.tag}
+**Discord ID:** ${taggedUser.id}
+**Account Created On:** ${taggedUser.createdAt}
+**Joined This Server On:** ${member.joinedAt}
+            `;
+
+			return await message.channel.send(userInfo);
+		} else {
+			return await message.channel.send("you have to @ the user...");
 		}
 	}
 
@@ -210,7 +231,7 @@ client.on("messageCreate", async (message) => {
 		return await SendMessage(message.channel.id, `${answer}`);
 	}
 
-	// hug command 
+	// hug command
 
 	if (message.content.startsWith("!!can i have a hug?")) {
 		const options = ["hmm sure, *hugs*", "**no, take a fucking shower**"];

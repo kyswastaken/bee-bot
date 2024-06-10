@@ -1,6 +1,21 @@
 {
-  "dependencies": {
-    "discord.js": "^14.15.2",
-    "string-math": "^1.2.2"
-  }
+	"dependencies": {
+		"discord.js": "^14.15.3",
+		"string-math": "^1.2.2"
+	},
+	"name": "bee-bot",
+	"version": "1.0.0",
+	"description": "A starter project for me starting to develop, multipurpose discord bot.",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kyswastaken/bee-bot.git"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"start": "node .",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "kyswastaken",
+	"license": "ISC"
 }
